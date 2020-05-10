@@ -7,7 +7,7 @@ ARCHS="armeabi-v7a arm64-v8a"
 
 pushd libpng-android
 
-# ./build.sh
+./build.sh
 
 for ARCH in $ARCHS
 do

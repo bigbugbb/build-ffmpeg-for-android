@@ -16,6 +16,14 @@ else
     git clone https://code.videolan.org/videolan/x264.git
 fi
 
+if [ -d "./libmp3lame" ] 
+then
+    echo "libmp3lame source code exists." 
+else
+    echo "Grab libmp3lame..."
+    git clone https://github.com/bigbugbb/libmp3lame-android.git libmp3lame
+fi
+
 if [ -d "./libpng-android" ] 
 then
     echo "libpng source code exists." 
@@ -34,6 +42,7 @@ else
 fi
 
 ./build_android_png.sh
+./build_android_libmp3lame.sh
 ./build_android_x264.sh
 ./build_android_ffmpeg.sh
 

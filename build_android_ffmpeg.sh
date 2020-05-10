@@ -6,6 +6,7 @@ SOURCE=$CWD/ffmpeg-3.3.9
 OUTPUT_DIR=$CWD/build/android/ffmpeg
 X264_DIR=$CWD/build/android/x264
 PNG_DIR=$CWD/build/android/png
+MP3LAME_DIR=$CWD/build/android/libmp3lame
 ACC_DIR=
 TEMP_DIR="tmp/android/ffmpeg"
 ARCHS="armeabi-v7a arm64-v8a"
@@ -14,11 +15,13 @@ ARCHS="armeabi-v7a arm64-v8a"
 MODULES="\
 	--enable-gpl
 	--enable-libx264 \
+	--enable-libmp3lame \
 	--enable-hwaccel=h264_vaapi \
 	--enable-hwaccel=h264_vaapi \
 	--enable-hwaccel=h264_dxva2 \
 	--enable-hwaccel=mpeg4_vaapi \
 	--enable-hwaccels \
+	--enable-pthreads \
 	--enable-jni \
 	--enable-mediacodec \
 	--enable-gpl \
@@ -165,6 +168,10 @@ for ARCH in $ARCHS; do
 	fi
 	if [ "$PNG_DIR" ] ; then
 		EXTRA_LDFLAGS="$EXTRA_LDFLAGS -L$PNG_DIR/$ARCH/lib"
+	fi
+	if [ "$MP3LAME_DIR" ] ; then
+		EXTRA_CFLAGS="$EXTRA_CFLAGS -I$MP3LAME_DIR/$ARCH/include"
+		EXTRA_LDFLAGS="$EXTRA_LDFLAGS -L$MP3LAME_DIR/$ARCH/lib"
 	fi
 	if [ "$ACC_DIR" ] ; then
 		EXTRA_CFLAGS="$EXTRA_CFLAGS -I$ACC_DIR/$ARCH/include"
